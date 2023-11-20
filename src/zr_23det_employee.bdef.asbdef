@@ -1,0 +1,72 @@
+managed implementation in class zbp_r_23det_employee unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_23DET_EMPLOYEE alias Employee
+persistent table z23det_employee
+draft table z23det_employe_d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _Requests { create; with draft; }
+
+  draft action Activate;
+  draft action Discard;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Resume;
+
+  field ( readonly, numbering : managed) EmployeeUuid;
+
+  mapping for z23det_employee corresponding
+  {
+    CreatedAt = created_at;
+    CreatedBy = created_by;
+    EmployeeNr = employee_nr;
+    EmployeeUuid = employee_uuid;
+    EntryDate = entry_date;
+    FirstName = first_name;
+    LastName = last_name;
+    LastChangedAt = last_changed_at;
+    LastChangedBy = last_changed_by;
+  }
+}
+
+define behavior for ZR_23DET_Vac_Req alias Request
+persistent table z23det_vac_req
+draft table z23det_vac_req_d
+lock dependent by _Employee
+authorization dependent by _Employee
+//etag master <field_name>
+{
+  update;
+  delete;
+
+  field ( readonly, numbering : managed ) RequstUuid;
+  field ( readonly ) EmployeeUuid;
+  association _Employee { with draft; }
+
+  mapping for z23det_vac_req corresponding
+  {
+    Applicant = applicant;
+    Approver = approver;
+    CreatedAt = created_at;
+    CreatedBy = created_by;
+    EmployeeUuid = employee_uuid;
+    EndDate = end_date;
+    LastChangedAt = last_changed_at;
+    LastChangedBy = last_changed_by;
+    ReqComment = req_comment;
+    RequestId = request_id;
+    RequstUuid = requst_uuid;
+    StartDate = start_date;
+    Status = status;
+	
+}
+
+}

@@ -3,10 +3,13 @@
 {
 "FROM":
 [
+"ZI_23DET_APPLICANTTEXT",
 "Z23DET_EMPLOYEE"
 ],
 "ASSOCIATED":
-[],
+[
+"ZR_23DET_VAC_REQ"
+],
 "BASE":
 [],
 "ANNO_REF":

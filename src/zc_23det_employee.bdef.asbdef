@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_23DET_EMPLOYEE //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Requests { create; with draft; }
+
+  use action Activate;
+  use action Edit;
+  use action Discard;
+  use action Prepare;
+  use action Resume;
+}
+
+define behavior for ZC_23DET_Vac_Req //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _Employee { with draft; }
+}

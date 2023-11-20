@@ -3,7 +3,7 @@
 {
     typeNamePlural: 'Employees',
     typeName: 'Employee',
-    title.value: 'FirstName'
+    title.value: 'ApplicantName'
 
 }
 
@@ -13,12 +13,13 @@ annotate view ZC_23DET_EMPLOYEE with
  @UI.facet:
   [
     { position: 10, targetQualifier: 'EmployeeDetails', label: 'Employee Details', type: #FIELDGROUP_REFERENCE },
-    { position: 20, targetQualifier: 'AdminData', label: 'Administrative Data', type: #FIELDGROUP_REFERENCE }
+    { position: 20, targetQualifier: 'AdminData', label: 'Administrative Data', type: #FIELDGROUP_REFERENCE },
+    { position: 30, targetElement: '_Requests', label: 'Requests', type: #LINEITEM_REFERENCE }
   ]
 
 
   @UI.fieldGroup: [{ position: 10, qualifier: 'AdminData' }]
-  EmployeeId;
+  EmployeeUuid;
   
   @UI.lineItem: [{ position: 20 }]
   @UI.fieldGroup: [{ position: 10, qualifier: 'EmployeeDetails' }]
@@ -37,6 +38,8 @@ annotate view ZC_23DET_EMPLOYEE with
   @UI.fieldGroup: [{ position: 40, qualifier: 'EmployeeDetails' }]
   @UI.selectionField: [{ position: 20 }]
   EntryDate;
+  
+ 
 
   /* Administrative Data */
   

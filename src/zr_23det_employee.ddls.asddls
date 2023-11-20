@@ -2,9 +2,11 @@
 @EndUserText.label: 'Employee'
 define root view entity ZR_23DET_EMPLOYEE
   as select from z23det_employee
-  //  composition of target_data_source_name as _association_name
+    composition [0..*] of ZR_23DET_Vac_Req as _Requests
+    association [1..1] to ZI_23DET_ApplicantText as _ApplicantText on $projection.EmployeeUuid = _ApplicantText.EmployeeUuid
 {
-  key employee_id     as EmployeeId,
+      @ObjectModel.text.element: ['ApplicantName']
+  key employee_uuid   as EmployeeUuid,
       employee_nr     as EmployeeNr,
       first_name      as FirstName,
       last_name       as LastName,
@@ -14,6 +16,11 @@ define root view entity ZR_23DET_EMPLOYEE
       created_by      as CreatedBy,
       created_at      as CreatedAt,
       last_changed_by as LastChangedBy,
-      last_changed_at as LastChangedAt
-      //  _association_name // Make association public
+      last_changed_at as LastChangedAt,
+      
+      
+      /* Transient Data */
+      _ApplicantText.Name as ApplicantName,
+      
+      _Requests // Make association public
 }

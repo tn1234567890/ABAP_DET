@@ -4,9 +4,10 @@
 @Search.searchable: true
 @Metadata.allowExtensions: true
 define root view entity ZC_23DET_EMPLOYEE
+  provider contract transactional_query
   as projection on ZR_23DET_EMPLOYEE
 {
-  key EmployeeId,
+  key EmployeeUuid,
       EmployeeNr,
       @Search.defaultSearchElement: true
       @Search.fuzzinessThreshold: 0.7
@@ -20,5 +21,13 @@ define root view entity ZC_23DET_EMPLOYEE
       CreatedBy,
       CreatedAt,
       LastChangedBy,
-      LastChangedAt
+      LastChangedAt,
+      
+        /* Transient Data */
+      ApplicantName,
+      
+      
+      
+      /* Association */
+      _Requests : redirected to composition child ZC_23DET_Vac_Req
 }

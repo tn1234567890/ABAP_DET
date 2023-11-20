@@ -19,73 +19,128 @@ CLASS ZCL_23DET_EMPL_GEN IMPLEMENTATION.
 
     DATA employees TYPE TABLE OF z23det_employee.
     DATA employee TYPE z23det_employee.
+    DATA requests TYPE TABLE OF z23det_vac_req.
+    DATA request TYPE z23det_vac_req.
 
     DELETE FROM z23det_employee.
+    DELETE FROM z23det_vac_req.
 
-    "Admin Data
+    "Admin Data für Employees
     employee-client = sy-mandt.
     employee-created_by = 'GENERATOR'.
     employee-last_changed_by = 'GENERATOR'.
     GET TIME STAMP FIELD employee-created_at.
     GET TIME STAMP FIELD employee-last_changed_at.
 
+    "Admin Data für Requests
+    request-client = sy-mandt.
+    request-created_by = 'GENERATOR'.
+    request-last_changed_by = 'GENERATOR'.
+    GET TIME STAMP FIELD request-created_at.
+    GET TIME STAMP FIELD request-last_changed_at.
+
     "Create Employee
-    employee-employee_id = cl_system_uuid=>create_uuid_x16_static(  ).
+
+    employee-employee_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
     employee-employee_nr = '000001'.
-    employee-first_name = 'Anna'.
-    employee-last_name = 'Müller'.
-    employee-entry_date = '20170415'.
-
+    employee-first_name = 'Hans'.
+    employee-last_name = 'Maier'.
+    employee-entry_date = '20000501'.
     APPEND employee TO employees.
+
+    request-applicant = employee-employee_uuid.
+    request-approver = 'Lisa' && 'Müller'.
+    request-start_date = '20220701'.
+    request-end_date = '20220710'.
+    request-requst_uuid = cl_system_uuid=>create_uuid_x16_static(  ). "employee-employee_id. Frage: UUID oder gleiche ID wie employee?
+    request-employee_uuid = employee-employee_uuid.
+    "request-request_id = '00010'.
+    "request-employee_uuid = employee-
+    request-req_comment = 'Sommerurlaub'.
+    request-status = 'G'.
+    APPEND request TO requests.
+
+    request-applicant = employee-employee_uuid.
+    request-approver = 'Lisa' && 'Müller'.
+    request-start_date = '20221227'.
+    request-end_date = '20221230'.
+    request-requst_uuid = cl_system_uuid=>create_uuid_x16_static(  ). "employee-employee_id. Frage: UUID oder gleiche ID wie employee?
+    request-employee_uuid = employee-employee_uuid.
+    "request-request_id = '00011'.
+    request-req_comment = 'Weihnachtsurlaub'.
+    request-status = 'A'.
+    APPEND request TO requests.
+
+    request-applicant = employee-employee_uuid.
+    request-approver = 'Lisa' && 'Müller'.
+    request-start_date = '20221228'.
+    request-end_date = '20221230'.
+    request-requst_uuid = cl_system_uuid=>create_uuid_x16_static(  ). "employee-employee_id. Frage: UUID oder gleiche ID wie employee?
+    request-employee_uuid = employee-employee_uuid.
+    "request-request_id = '00012'.
+    request-req_comment = 'Weihnachtsurlaub (2.Versuch)'.
+    request-status = 'G'.
+    APPEND request TO requests.
+
+    request-applicant = employee-employee_uuid.
+    request-approver = 'Lisa' && 'Müller'.
+    request-start_date = '20230527'.
+    request-end_date = '20230614'.
+    request-requst_uuid = cl_system_uuid=>create_uuid_x16_static(  ). "employee-employee_id. Frage: UUID oder gleiche ID wie employee?
+    request-employee_uuid = employee-employee_uuid.
+    "request-request_id = '00013'.
+    request-req_comment = ''.
+    request-status = 'G'.
+    APPEND request TO requests.
+
+    request-applicant = employee-employee_uuid.
+    request-approver = 'Lisa' && 'Müller'.
+    request-start_date = '20231220'.
+    request-end_date = '20231231'.
+    request-requst_uuid = cl_system_uuid=>create_uuid_x16_static(  ). "employee-employee_id. Frage: UUID oder gleiche ID wie employee?
+    request-employee_uuid = employee-employee_uuid.
+    "request-request_id = '00014'.
+    request-req_comment = 'Winterurlaub'.
+    request-status = 'B'.
+    APPEND request TO requests.
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     "Create Employee
-    employee-employee_id = cl_system_uuid=>create_uuid_x16_static(  ).
+    employee-employee_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
     employee-employee_nr = '000002'.
-    employee-first_name = 'Markus'.
-    employee-last_name = 'Schmidt'.
-    employee-entry_date = '20150903'.
+    employee-first_name = 'Lisa'.
+    employee-last_name = 'Müller'.
+    employee-entry_date = '20100701'.
 
     APPEND employee TO employees.
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     "Create Employee
-    employee-employee_id = cl_system_uuid=>create_uuid_x16_static(  ).
+    employee-employee_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
     employee-employee_nr = '000003'.
-    employee-first_name = 'Laura'.
-    employee-last_name = 'Wagner'.
-    employee-entry_date = '20181122'.
+    employee-first_name = 'Petra'.
+    employee-last_name = 'Schmid'.
+    employee-entry_date = '20221001'.
 
     APPEND employee TO employees.
+
+    request-applicant = employee-employee_uuid.
+    request-approver = 'Hans' && 'Maier'.
+    request-start_date = '20231227'.
+    request-end_date = '20231231'.
+    request-requst_uuid = cl_system_uuid=>create_uuid_x16_static(  ). "employee-employee_id. Frage: UUID oder gleiche ID wie employee?
+    request-employee_uuid = employee-employee_uuid.
+    "request-request_id = '00001'.
+    request-req_comment = 'Weihnachtsurlaub'.
+    request-status = 'B'.
+    APPEND request TO requests.
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    "Create Employee
-    employee-employee_id = cl_system_uuid=>create_uuid_x16_static(  ).
-    employee-employee_nr = '000004'.
-    employee-first_name = 'Micheal'.
-    employee-last_name = 'Berger'.
-    employee-entry_date = '20160710'.
-
-    APPEND employee TO employees.
-
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    "Create Employee
-    employee-employee_id = cl_system_uuid=>create_uuid_x16_static(  ).
-    employee-employee_nr = '000005'.
-    employee-first_name = 'Sarah'.
-    employee-last_name = 'Keller'.
-    employee-entry_date = '20191205'.
-
-    APPEND employee TO employees.
-
 
     INSERT z23det_employee FROM TABLE @employees.
-
-
+    INSERT z23det_vac_req FROM TABLE @requests.
 
 
   ENDMETHOD.
