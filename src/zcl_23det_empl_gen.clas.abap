@@ -21,9 +21,13 @@ CLASS ZCL_23DET_EMPL_GEN IMPLEMENTATION.
     DATA employee TYPE z23det_employee.
     DATA requests TYPE TABLE OF z23det_vac_req.
     DATA request TYPE z23det_vac_req.
+    DATA demands TYPE TABLE OF z23det_vac_dem.
+    DATA demand TYPE z23det_vac_dem.
+
 
     DELETE FROM z23det_employee.
     DELETE FROM z23det_vac_req.
+    DELETE FROM z23det_vac_dem.
 
     "Admin Data für Employees
     employee-client = sy-mandt.
@@ -39,7 +43,15 @@ CLASS ZCL_23DET_EMPL_GEN IMPLEMENTATION.
     GET TIME STAMP FIELD request-created_at.
     GET TIME STAMP FIELD request-last_changed_at.
 
-    "Create Employee
+    "Admin Data für Demands
+    demand-client = sy-mandt.
+    demand-created_by = 'GENERATOR'.
+    demand-last_changed_by = 'GENERATOR'.
+    GET TIME STAMP FIELD demand-created_at.
+    GET TIME STAMP FIELD demand-last_changed_at.
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    "Create Employee: Hans Maier(1)
 
     employee-employee_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
     employee-employee_nr = '000001'.
@@ -47,6 +59,8 @@ CLASS ZCL_23DET_EMPL_GEN IMPLEMENTATION.
     employee-last_name = 'Maier'.
     employee-entry_date = '20000501'.
     APPEND employee TO employees.
+
+    "Vacation Requests
 
     request-applicant = employee-employee_uuid.
     request-approver = 'Lisa' && 'Müller'.
@@ -104,27 +118,51 @@ CLASS ZCL_23DET_EMPL_GEN IMPLEMENTATION.
     request-status = 'B'.
     APPEND request TO requests.
 
+    "Vacation Demands
+
+    demand-employee_uuid = employee-employee_uuid.
+    demand-dem_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
+    demand-curr_year = '2022'.
+    demand-vac_days = '30'.
+    APPEND demand TO demands.
+
+    demand-employee_uuid = employee-employee_uuid.
+    demand-dem_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
+    demand-curr_year = '2023'.
+    demand-vac_days = '30'.
+    APPEND demand TO demands.
+
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    "Create Employee
+    "Create Employee: Lisa Müller(2)
+
     employee-employee_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
     employee-employee_nr = '000002'.
     employee-first_name = 'Lisa'.
     employee-last_name = 'Müller'.
     employee-entry_date = '20100701'.
-
     APPEND employee TO employees.
+
+    "Vacation Demand
+
+    demand-employee_uuid = employee-employee_uuid.
+    demand-dem_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
+    demand-curr_year = '2023'.
+    demand-vac_days = '30'.
+    APPEND demand TO demands.
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    "Create Employee
+    "Create Employee: Petra Schmid(3)
+
     employee-employee_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
     employee-employee_nr = '000003'.
     employee-first_name = 'Petra'.
     employee-last_name = 'Schmid'.
     employee-entry_date = '20221001'.
-
     APPEND employee TO employees.
+
+    "Vacation Request
 
     request-applicant = employee-employee_uuid.
     request-approver = 'Hans' && 'Maier'.
@@ -137,10 +175,19 @@ CLASS ZCL_23DET_EMPL_GEN IMPLEMENTATION.
     request-status = 'B'.
     APPEND request TO requests.
 
+    "Vacation Demand
+
+    demand-employee_uuid = employee-employee_uuid.
+    demand-dem_uuid = cl_system_uuid=>create_uuid_x16_static(  ).
+    demand-curr_year = '2023'.
+    demand-vac_days = '7'.
+    APPEND demand TO demands.
+
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     INSERT z23det_employee FROM TABLE @employees.
     INSERT z23det_vac_req FROM TABLE @requests.
+    INSERT z23det_vac_dem FROM TABLE @demands.
 
 
   ENDMETHOD.

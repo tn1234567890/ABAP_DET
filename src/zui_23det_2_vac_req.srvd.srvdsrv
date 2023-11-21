@@ -1,0 +1,4 @@
+@EndUserText.label: '2 Vacation Request'
+define service ZUI_23DET_2_VAC_REQ {
+  expose ZC_23DET_2_Vac_Req;
+}

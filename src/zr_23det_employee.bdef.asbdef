@@ -14,6 +14,7 @@ authorization master ( instance )
   update;
   delete;
   association _Requests { create; with draft; }
+  association _Demands { create; with draft; }
 
   draft action Activate;
   draft action Discard;
@@ -66,7 +67,37 @@ authorization dependent by _Employee
     RequstUuid = requst_uuid;
     StartDate = start_date;
     Status = status;
-	
+
+}
+
+}
+
+define behavior for ZR_23DET_Vac_Dem alias Demand
+persistent table z23det_vac_dem
+draft table z23det_vac_dem_d
+lock dependent by _Employee
+authorization dependent by _Employee
+//etag master <field_name>
+{
+  update;
+  delete;
+
+  field ( readonly, numbering : managed ) DemUuid;
+  field ( readonly ) EmployeeUuid;
+  association _Employee { with draft; }
+
+  mapping for z23det_vac_dem corresponding
+  {
+    DemUuid = dem_uuid;
+    EmployeeUuid = employee_uuid;
+    CurrYear = curr_year;
+    VacDays = vac_days;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+
+
 }
 
 }

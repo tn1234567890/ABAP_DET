@@ -2,4 +2,5 @@
 define service ZUI_23DET_EMPLOYEE {
   expose ZC_23DET_EMPLOYEE as Employee;
   expose ZC_23DET_Vac_Req  as Request;
+  expose ZC_23DET_Vac_Dem  as Demand;
 }

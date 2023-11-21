@@ -3,6 +3,7 @@
 define root view entity ZR_23DET_EMPLOYEE
   as select from z23det_employee
     composition [0..*] of ZR_23DET_Vac_Req as _Requests
+    composition [0..*] of ZR_23DET_Vac_Dem as _Demands
     association [1..1] to ZI_23DET_ApplicantText as _ApplicantText on $projection.EmployeeUuid = _ApplicantText.EmployeeUuid
 {
       @ObjectModel.text.element: ['ApplicantName']
@@ -22,5 +23,7 @@ define root view entity ZR_23DET_EMPLOYEE
       /* Transient Data */
       _ApplicantText.Name as ApplicantName,
       
-      _Requests // Make association public
+      /* Association */
+      _Requests,
+      _Demands // Make association public
 }

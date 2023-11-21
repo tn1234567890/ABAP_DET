@@ -29,5 +29,6 @@ define root view entity ZC_23DET_EMPLOYEE
       
       
       /* Association */
-      _Requests : redirected to composition child ZC_23DET_Vac_Req
+      _Requests : redirected to composition child ZC_23DET_Vac_Req,
+      _Demands : redirected to composition child ZC_23DET_Vac_Dem
 }

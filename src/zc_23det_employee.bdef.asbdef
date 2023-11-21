@@ -8,13 +8,22 @@ define behavior for ZC_23DET_EMPLOYEE //alias <alias_name>
   use update;
   use delete;
 
-  use association _Requests { create; with draft; }
-
   use action Activate;
-  use action Edit;
   use action Discard;
+  use action Edit;
   use action Prepare;
   use action Resume;
+
+  use association _Requests { create; with draft; }
+  use association _Demands { create; with draft; }
+}
+
+define behavior for ZC_23DET_Vac_Dem //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _Employee { with draft; }
 }
 
 define behavior for ZC_23DET_Vac_Req //alias <alias_name>

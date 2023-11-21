@@ -14,7 +14,8 @@ annotate view ZC_23DET_EMPLOYEE with
   [
     { position: 10, targetQualifier: 'EmployeeDetails', label: 'Employee Details', type: #FIELDGROUP_REFERENCE },
     { position: 20, targetQualifier: 'AdminData', label: 'Administrative Data', type: #FIELDGROUP_REFERENCE },
-    { position: 30, targetElement: '_Requests', label: 'Requests', type: #LINEITEM_REFERENCE }
+    { position: 30, targetElement: '_Requests', label: 'Requests', type: #LINEITEM_REFERENCE },
+    { position: 40, targetElement: '_Demands', label: 'Demands', type: #LINEITEM_REFERENCE }
   ]
 
 
